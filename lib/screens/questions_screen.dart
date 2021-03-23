@@ -1,3 +1,6 @@
+import 'package:faq_flutter/constants/colors.dart';
+import 'package:faq_flutter/widgets/add_button.dart';
+import 'package:faq_flutter/widgets/question_tile.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -11,27 +14,41 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Perguntas Frequentes'),
+        title: Text(
+          'Perguntas Frequentes',
+          style: TextStyle(
+            fontSize: 15,
+            fontWeight: FontWeight.bold
+          ),
+        ),
         actions: [
           IconButton(
-            icon: Icon(Icons.search),
+            icon: Icon(
+              CupertinoIcons.search,
+              color: Colors.white,
+            ),
             onPressed: null,
           ),
         ],
       ),
-      body: SingleChildScrollView(
-        padding: EdgeInsets.all(16),
+      body: Padding(
+        padding: EdgeInsets.symmetric(horizontal: 12, vertical: 16),
         child: Column(
           children: [
-            Card(
-              elevation: 5,
-              child: ExpansionTile(
-                title: Text('Qustion?'),
-                children: [
-                  Text('Answer!'),
-                ],
+            Expanded(
+              child: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    QuestionTile(
+                      color: GREEN,
+                      question: 'Qustion?',
+                      answer: 'Lorem ipsum dolor sit smet, consectetur adipiscing slit, sed do eiusmod tempor incidunt'
+                    ),
+                  ],
+                ),
               ),
-            )
+            ),
+            AddButton(),
           ],
         ),
       ),
