@@ -1,6 +1,7 @@
+import 'package:faq_flutter/bloc/questions_bloc.dart';
 import 'package:faq_flutter/constants/colors.dart';
+import 'package:faq_flutter/model/qa_pair.dart';
 import 'package:faq_flutter/widgets/color_picker.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class AddQuestionScreen extends StatefulWidget {
@@ -9,8 +10,12 @@ class AddQuestionScreen extends StatefulWidget {
 }
 
 class _AddQuestionScreenState extends State<AddQuestionScreen> {
+
+  final QuestionBloc _bloc = QuestionBloc.getInstance;
   final colors = [GREEN, RED, YELLOW, BLUE];
   Color selected = GREEN;
+  TextEditingController _questionController = TextEditingController();
+  TextEditingController _answerController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -42,6 +47,7 @@ class _AddQuestionScreenState extends State<AddQuestionScreen> {
                         gapPadding: 5,
                       ),
                     ),
+                    controller: ,
                   ),
                 ),
                 Padding(
@@ -83,7 +89,7 @@ class _AddQuestionScreenState extends State<AddQuestionScreen> {
                       EdgeInsets.symmetric(vertical: 10)
                     )
                   ),
-                  onPressed: () => Navigator.of(context).pop(true),
+                  onPressed: () => addQA(),
                   child: Text(
                     'Adicionar',
                     style: TextStyle(
@@ -95,5 +101,13 @@ class _AddQuestionScreenState extends State<AddQuestionScreen> {
           ),
         ),
     );
+  }
+
+  addQA() {
+    var result = _bloc.addQuestion(QAPair(
+      question: _questionController.text,
+      answer: _answerController.text,
+    ));
+    if()
   }
 }

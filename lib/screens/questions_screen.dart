@@ -1,4 +1,6 @@
+import 'package:faq_flutter/bloc/questions_bloc.dart';
 import 'package:faq_flutter/constants/colors.dart';
+import 'package:faq_flutter/model/qa_pair.dart';
 import 'package:faq_flutter/screens/add_question_screen.dart';
 import 'package:faq_flutter/widgets/add_button.dart';
 import 'package:faq_flutter/widgets/question_tile.dart';
@@ -12,6 +14,9 @@ class QuestionsScreen extends StatefulWidget {
 }
 
 class _QuestionsScreenState extends State<QuestionsScreen> {
+
+  final QuestionBloc _bloc = QuestionBloc.getInstance;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -39,14 +44,24 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
           children: [
             Expanded(
               child: SingleChildScrollView(
-                child: Column(
-                  children: [
-                    QuestionTile(
-                      color: GREEN,
-                      question: 'Qustion?',
-                      answer: 'Lorem ipsum dolor sit smet, consectetur adipiscing slit, sed do eiusmod tempor incidunt'
-                    ),
-                  ],
+                child: StreamBuilder<List<QAPair>>(
+                  stream: _bloc.outValues,
+                  builder: (context, snapshot) {
+                    if (!snapshot.hasData) {
+                      return Center(
+                        child: Text('Nenhuma pergunta por aqui'),
+                      );
+                    }
+                    return Column(
+                      children: snapshot.data.map<Widget>((question) => 
+                        QuestionTile(
+                          color: GREEN,
+                          question: question.question,
+                          answer: question.answer,
+                        ),
+                      ).toList(),
+                    );
+                  }
                 ),
               ),
             ),
