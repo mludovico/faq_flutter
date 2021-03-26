@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "543520384543",
+    "project_id": "faq-flutter-snowman",
+    "storage_bucket": "faq-flutter-snowman.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:543520384543:android:6a55dc007a2c77b20fd72a",
+        "android_client_info": {
+          "package_name": "br.com.mludovico.faqFluter"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "543520384543-0c5q195n965bhd8ve71i16a5osk18uos.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAwfARMZ6heu6Pc8aRwudicsHq_L5IqPw8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "543520384543-0c5q195n965bhd8ve71i16a5osk18uos.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "543520384543-7ahidisodf7s1enmm4jv134vk010snbn.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "br.com.mludovico.faqFlutter"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

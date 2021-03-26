@@ -30,6 +30,9 @@ dependencies:
   cupertino_icons: ^1.0.2
 
   flutter_native_splash: ^1.1.4+1
+  cloud_firestore: ^1.0.2
+  rxdart:
+  bloc:
 
 flutter_native_splash:
   color: "#46c9a8"
