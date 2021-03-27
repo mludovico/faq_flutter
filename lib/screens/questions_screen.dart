@@ -4,7 +4,6 @@ import 'package:faq_flutter/model/qa_pair.dart';
 import 'package:faq_flutter/screens/add_question_screen.dart';
 import 'package:faq_flutter/widgets/add_button.dart';
 import 'package:faq_flutter/widgets/question_tile.dart';
-import 'package:faq_flutter/widgets/snack_contents.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -47,7 +46,7 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
                 child: StreamBuilder<List<QAPair>>(
                   stream: _bloc.outValues,
                   builder: (context, snapshot) {
-                    if (!snapshot.hasData) {
+                    if (!snapshot.hasData || snapshot.data.isEmpty) {
                       return Center(
                         child: Text('Nenhuma pergunta por aqui'),
                       );
@@ -55,7 +54,7 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
                     return Column(
                       children: snapshot.data.map<Widget>((question) => 
                         QuestionTile(
-                          color: GREEN,
+                          color: COLORS[question.colorIndex],
                           question: question.question,
                           answer: question.answer,
                         ),
@@ -66,20 +65,12 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
               ),
             ),
             AddButton(
-              onPressed: () async  {
-                var success = await Navigator.of(context).push(
+              onPressed: () {
+                Navigator.of(context).push(
                   MaterialPageRoute(
                     builder: (_) => AddQuestionScreen(),
                   ),
                 );
-                if (success != null) {
-                  SnackBar snack = SnackBar(
-                    padding: EdgeInsets.all(3),
-                    backgroundColor: GREEN,
-                    content: SnackContents(success: success,),
-                  );
-                  ScaffoldMessenger.of(context).showSnackBar(snack);
-                }
               },
             ),
           ],

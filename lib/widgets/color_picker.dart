@@ -1,11 +1,12 @@
+import 'package:faq_flutter/constants/colors.dart';
 import 'package:flutter/material.dart';
 
 class ColorPicker extends StatefulWidget {
 
-  final List<Color> colors;
-  final Color selected;
+  final int selected;
+  final Function(int selected) onTap;
 
-  ColorPicker({this.colors, this.selected});
+  ColorPicker({this.selected, this.onTap});
 
   @override
   _ColorPickerState createState() => _ColorPickerState(selected);
@@ -13,7 +14,7 @@ class ColorPicker extends StatefulWidget {
 
 class _ColorPickerState extends State<ColorPicker> {
 
-  Color selected;
+  int selected;
   _ColorPickerState(this.selected);
 
   @override
@@ -21,11 +22,12 @@ class _ColorPickerState extends State<ColorPicker> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
-        for (Color color in widget.colors)
+        for (int i = 0; i < COLORS.length; i++)
           GestureDetector(
             onTap: () {
+              widget.onTap(i);
               setState(() {
-                selected = color;
+                selected = i;
               });
             },
             child: Container(
@@ -42,13 +44,13 @@ class _ColorPickerState extends State<ColorPicker> {
               child: Container(
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
-                  color: color,
+                  color: COLORS[i],
                 ),
                 padding: EdgeInsets.all(2),
                 width: 32,
                 height: 32,
                 child: Center(
-                  child: selected == color
+                  child: selected == i
                       ? Icon(
                     Icons.check,
                     size: 16,
