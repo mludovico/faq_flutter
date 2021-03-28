@@ -19,7 +19,7 @@ class _QuestionTileState extends State<QuestionTile> {
   Widget build(BuildContext context) {
     return Card(
       color: widget.color,
-      elevation: 15,
+      elevation: 3,
       child: Container(
         decoration: BoxDecoration(
           color: Colors.white,

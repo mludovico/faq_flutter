@@ -11,8 +11,10 @@ class QuestionBloc {
 
   final _questionsController = BehaviorSubject<List<QAPair>>();
   final _loadingController = BehaviorSubject<bool>();
+  final _searchModeController = BehaviorSubject<bool>();
   Stream<List<QAPair>> get outValues => _questionsController.stream;
   Stream<bool> get outLoading => _loadingController.stream;
+  Stream<bool> get outSearchMode => _searchModeController.stream;
   List<QAPair> qaList = [];
   FirebaseFirestore _firestore = FirebaseFirestore.instance;
   StreamSubscription sub;
@@ -42,8 +44,31 @@ class QuestionBloc {
     }
   }
 
+  activateSearchMode() {
+    _searchModeController.add(true);
+  }
+
+  deactivateSearchMode() {
+    _questionsController.add(qaList);
+    _searchModeController.add(false);
+  }
+
+  filterResults(String query) {
+    _loadingController.add(true);
+    if (query != null && query.isNotEmpty) {
+      var filteredList = qaList.where((element) =>
+        element.question.contains(query) || element.answer.contains(query)).toList();
+      _questionsController.add(filteredList);
+    } else {
+      _questionsController.add(qaList);
+    }
+    _loadingController.add(false);
+  }
+
   close() {
     sub.cancel();
     _questionsController.close();
+    _loadingController.close();
+    _searchModeController.close();
   }
 }
