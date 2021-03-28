@@ -4,6 +4,7 @@ import 'package:faq_flutter/model/qa_pair.dart';
 import 'package:faq_flutter/screens/add_question_screen.dart';
 import 'package:faq_flutter/widgets/add_button.dart';
 import 'package:faq_flutter/widgets/question_tile.dart';
+import 'package:faq_flutter/widgets/search_bar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -20,20 +21,36 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-          'Perguntas Frequentes',
-          style: TextStyle(
-            fontSize: 15,
-            fontWeight: FontWeight.bold
-          ),
+        title: StreamBuilder<bool>(
+          stream: _bloc.outSearchMode,
+          builder: (context, snapshot) {
+            if (snapshot.hasData && snapshot.data)
+              return SearchBar();
+            else
+              return Text(
+                'Perguntas Frequentes',
+                style: TextStyle(
+                  fontSize: 15,
+                  fontWeight: FontWeight.bold
+                ),
+              );
+          }
         ),
         actions: [
-          IconButton(
-            icon: Icon(
-              CupertinoIcons.search,
-              color: Colors.white,
-            ),
-            onPressed: null,
+          StreamBuilder<bool>(
+            stream: _bloc.outSearchMode,
+            builder: (context, snapshot) {
+              if (snapshot.hasData && snapshot.data)
+                return Container();
+              else
+                return IconButton(
+                  icon: Icon(
+                    CupertinoIcons.search,
+                    color: Colors.white,
+                  ),
+                  onPressed: _bloc.activateSearchMode,
+                );
+            }
           ),
         ],
       ),
