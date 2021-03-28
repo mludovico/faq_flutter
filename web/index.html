@@ -105,5 +105,22 @@
       loadMainDartJs();
     }
   </script>
+  <!-- The core Firebase JS SDK is always required and must be listed first -->
+  <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.5.1/firebase-firestore.js"></script>
+
+  <script>
+    // Your web app's Firebase configuration
+    var firebaseConfig = {
+      apiKey: "AIzaSyBVjPpSzqxAKqRfvrFoOTLhap4RusDIqCc",
+      authDomain: "faq-flutter-snowman.firebaseapp.com",
+      projectId: "faq-flutter-snowman",
+      storageBucket: "faq-flutter-snowman.appspot.com",
+      messagingSenderId: "543520384543",
+      appId: "1:543520384543:web:bf6b029e887b45820fd72a"
+    };
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+  </script>
 </body>
 </html>
