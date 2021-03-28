@@ -7,9 +7,9 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:543520384543:android:6a55dc007a2c77b20fd72a",
+        "mobilesdk_app_id": "1:543520384543:android:0830294eb0f5ce1a0fd72a",
         "android_client_info": {
-          "package_name": "br.com.mludovico.faqFluter"
+          "package_name": "br.com.mludovico.faq_flutter"
         }
       },
       "oauth_client": [
