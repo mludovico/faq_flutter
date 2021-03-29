@@ -95,4 +95,10 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
       ),
     );
   }
+  
+  @override
+  void dispose() {
+    _bloc.close();
+    super.dispose();
+  }
 }
